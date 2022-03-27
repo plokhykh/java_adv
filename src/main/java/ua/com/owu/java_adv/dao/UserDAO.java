@@ -3,7 +3,7 @@ package ua.com.owu.java_adv.dao;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import ua.com.owu.java_adv.models.User;
+import ua.com.owu.java_adv.models.entity.User;
 
 import java.util.List;
 
