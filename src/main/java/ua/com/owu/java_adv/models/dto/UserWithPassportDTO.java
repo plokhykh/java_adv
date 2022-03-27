@@ -12,7 +12,8 @@ public class UserWithPassportDTO {
     public UserWithPassportDTO(User user) {
         this.name = user.getName();
         this.age = user.getAge();
-        this.passport = new PassportDTO(user.getPassport());
+        if(user.getPassport() != null){
+            this.passport = new PassportDTO(user.getPassport());
+        }
     }
-
 }

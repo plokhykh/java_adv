@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @NoArgsConstructor
@@ -18,6 +19,11 @@ public class User {
     private String name;
     private int age;
 
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, age, passport);
+    }
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
