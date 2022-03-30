@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -28,4 +30,8 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @ToString.Exclude
     private Passport passport;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Card> cards = new ArrayList<>();
 }

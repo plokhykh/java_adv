@@ -1,4 +1,4 @@
-package ua.com.owu.java_adv.models.dto;
+package ua.com.owu.java_adv.models.dto.user;
 
 import lombok.Data;
 import ua.com.owu.java_adv.models.entity.User;
@@ -7,6 +7,7 @@ import ua.com.owu.java_adv.models.entity.User;
 public class UserDTO {
     private String name;
     private int age;
+
 
     public UserDTO (User user){
         this.name = user.getName();

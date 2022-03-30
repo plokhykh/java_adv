@@ -1,6 +1,7 @@
-package ua.com.owu.java_adv.models.dto;
+package ua.com.owu.java_adv.models.dto.user;
 
 import lombok.Data;
+import ua.com.owu.java_adv.models.dto.PassportDTO;
 import ua.com.owu.java_adv.models.entity.User;
 
 @Data

@@ -6,9 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.owu.java_adv.dao.PassportDAO;
 import ua.com.owu.java_adv.models.dto.PassportDTO;
-import ua.com.owu.java_adv.models.dto.UserDTO;
 import ua.com.owu.java_adv.models.entity.Passport;
-import ua.com.owu.java_adv.models.entity.User;
 
 import java.util.List;
 import java.util.stream.Collectors;
