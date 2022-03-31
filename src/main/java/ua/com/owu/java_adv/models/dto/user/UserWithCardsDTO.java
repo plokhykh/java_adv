@@ -1,7 +1,7 @@
 package ua.com.owu.java_adv.models.dto.user;
 
 import lombok.Data;
-import ua.com.owu.java_adv.models.dto.CardDTO;
+import ua.com.owu.java_adv.models.dto.card.CardDTO;
 import ua.com.owu.java_adv.models.entity.Card;
 import ua.com.owu.java_adv.models.entity.User;
 
