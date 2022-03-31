@@ -7,7 +7,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.com.owu.java_adv.dao.UserDAO;
 import ua.com.owu.java_adv.models.dto.user.UserDTO;
-import ua.com.owu.java_adv.models.dto.user.UserWithCardsDTO;
 import ua.com.owu.java_adv.models.dto.user.UserWithPassportDTO;
 import ua.com.owu.java_adv.models.entity.User;
 
@@ -46,13 +45,6 @@ public class UserController {
         return new ResponseEntity<>(userWithPassportDTO, HttpStatus.OK);
     }
 
-        @GetMapping("/with-cards")
-    public ResponseEntity<List<UserWithCardsDTO>> findAllWithCards() {
-        List<User> allUsers = userDAO.findAll();
-        List<UserWithCardsDTO> userWithCardsDTOS = allUsers.stream().map(UserWithCardsDTO::new).collect(Collectors.toList());
-        return new ResponseEntity<>(userWithCardsDTOS, HttpStatus.OK);
-    }
-
     @PatchMapping("/{id}")
     public ResponseEntity<UserDTO> updateUser(@PathVariable int id, @RequestBody User user) {
         if (userDAO.findById(id).isPresent()) {
@@ -85,13 +77,6 @@ public class UserController {
         userDAO.save(user);
         List<UserWithPassportDTO> userWithPassportDTO = userDAO.findAll().stream().map(UserWithPassportDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(userWithPassportDTO, HttpStatus.OK);
-    }
-
-    @PostMapping("/with-cards")
-    public ResponseEntity<List<UserWithCardsDTO>> saveUserWithCards(@RequestBody User user) {
-        userDAO.save(user);
-        List<UserWithCardsDTO> userWithCardsDTOS = userDAO.findAll().stream().map(UserWithCardsDTO::new).collect(Collectors.toList());
-        return new ResponseEntity<>(userWithCardsDTOS, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
