@@ -26,7 +26,7 @@ public class CardController {
 
     @GetMapping("")
     public ResponseEntity<List<CardWithUserDTO>> getAllCardsWithUser (){
-        List<Card> cardList = cardDAO.findAll();
+        List<Card> cardList = cardDAO.customQueryCardsWithUser();
         List<CardWithUserDTO> cardDTOS = cardList.stream().map(CardWithUserDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(cardDTOS, HttpStatus.OK);
     }

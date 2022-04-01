@@ -46,9 +46,9 @@ public class UserController {
         return new ResponseEntity<>(userWithPassportDTO, HttpStatus.OK);
     }
 
-        @GetMapping("/with-cards")
+    @GetMapping("/with-cards")
     public ResponseEntity<List<UserWithCardsDTO>> findAllWithCards() {
-        List<User> allUsers = userDAO.findAll();
+        List<User> allUsers = userDAO.customQueryUsersWithCards();
         List<UserWithCardsDTO> userWithCardsDTOS = allUsers.stream().map(UserWithCardsDTO::new).collect(Collectors.toList());
         return new ResponseEntity<>(userWithCardsDTOS, HttpStatus.OK);
     }

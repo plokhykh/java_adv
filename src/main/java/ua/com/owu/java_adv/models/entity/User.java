@@ -32,6 +32,10 @@ public class User {
     private Passport passport;
 
     @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinTable(
+            name="user_cards",
+            joinColumns = @JoinColumn(name ="user_id"),
+            inverseJoinColumns = @JoinColumn(name="card_id")
+    )
     private List<Card> cards = new ArrayList<>();
 }
