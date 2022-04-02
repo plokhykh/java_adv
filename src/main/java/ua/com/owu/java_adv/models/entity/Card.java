@@ -11,7 +11,6 @@ import javax.persistence.*;
 @Setter
 @NoArgsConstructor
 public class Card {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
