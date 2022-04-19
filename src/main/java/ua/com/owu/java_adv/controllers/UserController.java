@@ -2,11 +2,10 @@ package ua.com.owu.java_adv.controllers;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import ua.com.owu.java_adv.models.dto.UserDetailsDTO;
+import ua.com.owu.java_adv.models.entity.User;
 import ua.com.owu.java_adv.services.UserService;
 
-import javax.mail.MessagingException;
-import java.io.IOException;
 
 @RestController
 @RequestMapping("/users")
@@ -14,9 +13,24 @@ import java.io.IOException;
 public class UserController {
     private UserService userService;
 
-    @PostMapping("")
-    public void saveUser(@RequestParam String name, @RequestParam MultipartFile avatar, @RequestParam String email) throws IOException, MessagingException {
-        userService.saveUser(name, avatar, email);
+    @GetMapping("/hello")
+    public String greeting() {
+        return "Hello";
+    }
+
+    @PostMapping("/registration")
+    public void save(@RequestBody User user) {
+        userService.save(user);
+    }
+
+    @PostMapping("/login")
+    public String login() {
+        return "Logination success";
+    }
+
+    @GetMapping("/info/{id}")
+    public UserDetailsDTO userInfo(@PathVariable int id) {
+        return userService.findById(id);
     }
 
 }

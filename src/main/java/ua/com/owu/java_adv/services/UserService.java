@@ -1,33 +1,41 @@
 package ua.com.owu.java_adv.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-import ua.com.owu.java_adv.controllers.MailSenderService;
 import ua.com.owu.java_adv.dao.UserDAO;
+import ua.com.owu.java_adv.models.dto.UserDetailsDTO;
 import ua.com.owu.java_adv.models.entity.User;
 
-import javax.mail.MessagingException;
-import java.io.File;
-import java.io.IOException;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
     private UserDAO userDAO;
-    private MailSenderService mailSenderService;
+    private PasswordEncoder passwordEncoder;
 
-    public void saveUser(String name, MultipartFile avatar) throws IOException {
-        userDAO.save(new User(name, avatar.getOriginalFilename()));
-        String path = System.getProperty("user.home") + File.separator + "avatars" + File.separator;
-        avatar.transferTo(new File(path + avatar.getOriginalFilename()));
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userDAO.findByUsername(username);
     }
 
-    public void saveUser(String name, MultipartFile avatar, String email) throws IOException, MessagingException {
-        User user = new User(name, avatar.getOriginalFilename(), email);
-        String path = System.getProperty("user.home") + File.separator + "avatars" + File.separator;
-        mailSenderService.send(user, avatar);
+    public void save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userDAO.save(user);
-        avatar.transferTo(new File(path + avatar.getOriginalFilename()));
     }
+
+    public User findByName(String name) {
+        return userDAO.findByUsername(name);
+    }
+
+    public UserDetailsDTO findById (int id){
+        User user = userDAO.findById(id).orElse(new User());
+        return new UserDetailsDTO(user.getName(), user.getAge());
+    }
+
+
+
 }
